@@ -29,12 +29,25 @@
     // 💰 The example in the markdown file should be a good hint for you.
 
     const rootElement = document.getElementById('root')
-    const elementProps = {id: 'element-id', children: 'Text'}
-    const elementType = 'h1'
 
-    const reactElement = React.createElement(elementType, elementProps) // similar to document.createElement
+    const helloElement = React.createElement(
+      'span',
+      {
+        id: 'element-id',
+      },
+      'Text',
+    ) // similar to document.createElement
+
+    const worldElement = React.createElement('span', {id: 'tag-id'}, 'World')
+    const mainAppNode = React.createElement(
+      'div',
+      {},
+      helloElement,
+      ' ',
+      worldElement,
+    )
 
     const reactRoot = ReactDOM.createRoot(rootElement)
-    reactRoot.render(reactElement)
+    reactRoot.render(mainAppNode)
   </script>
 </body>
