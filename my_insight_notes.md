@@ -272,3 +272,22 @@ const ui = /*#__PURE__*/ React.createElement(
   /*#__PURE__*/ React.createElement("div", null, "There")
 );
 ```
+
+
+# style prop
+
+in htmnl we wass a "style" attribute with inline styles. In React we pass a object
+
+
+way of picking props when destructuring:
+
+```js
+const Box = ({className, size, children, style, ...otherProps}) => 
+
+```
+
+
+# forms
+
+## syntethic events
+When we console log a event from react controlled form we get a 'syntethic event'. This is a event that looks and likes like native browser event but its not one.

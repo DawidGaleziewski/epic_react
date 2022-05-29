@@ -19,13 +19,51 @@ function UsernameForm({onSubmitUsername}) {
 
   // 🐨 make sure to associate the label to the input.
   // to do so, set the value of 'htmlFor' prop of the label to the id of input
+
+  const passwordInputRef = React.useRef(null)
+
+  const [title, setTitle] = React.useState('')
+
+  const onTitleInputChangeHandler = event => {
+    if (!isTitleValid) {
+      console.log('wrong title!')
+    }
+    setTitle(event.target.value)
+  }
+
+  const onFormSubmit = event => {
+    event.preventDefault()
+    const usernameValue = event.target[0].value
+    console.log(usernameValue, passwordInputRef.current.value, title)
+  }
+
+  const isTitleValid = title.toUpperCase() === title
+
   return (
-    <form>
+    <form onSubmit={onFormSubmit}>
       <div>
-        <label>Username:</label>
-        <input type="text" />
+        {isTitleValid ? null : (
+          <div role="alert">Invalid title! use uppercase</div>
+        )}
+        {/* 1st method: just let it be */}
+        <label htmlFor="input-username">Username:</label>
+        <input id="input-username" type="text" />
+
+        {/* 2nd method: ref */}
+        <label htmlFor="input-password">Password</label>
+        <input ref={passwordInputRef} id="input-password" type="text" />
+
+        {/* 3rd method: state*/}
+        <label htmlFor="royal-title">Your royal title</label>
+        <input
+          id="royal-titile"
+          value={title}
+          onChange={onTitleInputChangeHandler}
+        />
       </div>
-      <button type="submit">Submit</button>
+      <button disabled={!isTitleValid} type="submit">
+        Submit
+      </button>
     </form>
   )
 }
