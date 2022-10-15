@@ -8,6 +8,54 @@
 
 import * as React from 'react'
 
+function GrandChild() {
+  console.log('%c    GrandChild: render start', 'color: MediumSpringGreen')
+
+  const [count, setCount] = React.useState(() => {
+    console.log('%c    GrandChild: useState(() => 0)', 'color: tomato')
+    return 0
+  })
+
+  React.useEffect(() => {
+    console.log('%c    GrandChild useEffect(() => {})', 'color: LightCoral')
+    return () => {
+      console.log(
+        '%c    GrandChild: useEffect(() => {}) cleanup 🧹',
+        'color: LightCoral',
+      )
+    }
+  })
+
+  React.useEffect(() => {
+    console.log(
+      '%c    GrandChild: useEffect(() => {}, [])',
+      'color: MediumTurquoise',
+    )
+    return () => {
+      console.log(
+        '%c    GrandChild: useEffect(() => {}, []) cleanup 🧹',
+        'color: MediumTurquoise',
+      )
+    }
+  }, [])
+
+  React.useEffect(() => {
+    console.log('%c    GrandChild: useEffect(() => {}, [count])', 'color: HotPink')
+    return () => {
+      console.log(
+        '%c    GrandChild: useEffect(() => {}, [count]) cleanup 🧹',
+        'color: HotPink',
+      )
+    }
+  }, [count])
+
+
+
+  console.log('%c    GrandChild: render end', 'color: MediumSpringGreen')
+
+  return <span>Test</span>
+}
+
 function Child() {
   console.log('%c    Child: render start', 'color: MediumSpringGreen')
 
@@ -52,6 +100,8 @@ function Child() {
   const element = (
     <button onClick={() => setCount(previousCount => previousCount + 1)}>
       {count}
+
+      <GrandChild />
     </button>
   )
 
